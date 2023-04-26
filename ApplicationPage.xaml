@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+x:Name="applicationPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ApplicationOrganizer"
+    x:Class="ApplicationOrganizer.ApplicationPage"
+     Title="{Binding Title}"
+    >
+    <ContentPage.Resources>
+        <local:ApplicationStatusToStringConverter x:Key="StatusToSTring" />
+    </ContentPage.Resources>
+    <VerticalStackLayout Spacing="10" Margin="32" WidthRequest="800">
+        <Picker x:Name="StatusPicker" WidthRequest="200" SelectedItem="{Binding Status}" ItemsSource="{Binding Source={x:Reference applicationPage}, Path=Statuses, ConverterParameter={StaticResource StatusToSTring}}" />
+        <Grid HorizontalOptions="Center" ColumnDefinitions="150,150,150" RowDefinitions="*,*">
+            <Label Text="Due" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center" />
+            <DatePicker x:Name="DueDatePicker" Date="{Binding DueDate}" Grid.Column="0" Grid.Row="1" HorizontalOptions="Center" />
+            <Label Text="Applied" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0" HorizontalOptions="Center" />
+            <DatePicker x:Name="DateAppliedPicker" Date="{Binding DateApplied}" Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" />
+            <Label Text="Interview" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="0" HorizontalOptions="Center" />
+            <DatePicker x:Name="InterviewPicker" Date="{Binding Interview}" Grid.Column="2" Grid.Row="1" HorizontalOptions="Center" />
+        </Grid>
+        <Grid ColumnDefinitions="*,*" Margin="0,16,0,0" ColumnSpacing="24" HeightRequest="500">
+            <FlexLayout Grid.Column="0" Direction="Column" FlexLayout.Grow="1" AlignContent="Start">
+                    <Label Text="Company" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="0" HorizontalTextAlignment="Start" Margin="0,8,0,0"/>
+                    <Entry x:Name="CompanyNameEditor"
+                    FontSize="Medium"
+                    Text="{Binding CompanyName}"
+                    Placeholder="Company Name"
+                    MaxLength="128"
+                    Grid.Column="1" />
+                    <Label Text="Contact" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="1" HorizontalOptions="Start" Margin="0,8,0,0"/>
+                    <Entry x:Name="ContactInfoEditor"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    FontSize="Medium"
+                    Text="{Binding ContactInfo}"
+                    Placeholder="Contact Info"
+                    MaxLength="128" />
+                    <Label Text="Info" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="2" HorizontalOptions="Start" Margin="0,8,0,0"/>
+                    <Editor x:Name="OtherInfoEditor"
+                    Grid.Column="1"
+                    Grid.Row="2"
+                    FontSize="Medium"
+                    Text="{Binding OtherInfo}"
+                    Placeholder="Info"
+                    FlexLayout.Grow="1"
+                    />
+            </FlexLayout>
+            <FlexLayout Grid.Column="1" Direction="Column" AlignContent="Start">
+                <Label FontSize="Subtitle" HorizontalOptions="Center">Documents</Label>
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="32" Margin="0,16,0,0">
+                    <Button x:Name="DocumentsOpenButton" Clicked="OpenDocumentsButtonClicked" Text="Open Folder" FontSize="Body" />
+                    <Button x:Name="DocumentsAddButton" Clicked="AddDocumentButtonClicked" Text="Add" FontSize="Body" />
+                </HorizontalStackLayout>
+                    <Border Margin="0,16,0,0" FlexLayout.Grow="1">
+                        <CollectionView
+                            x:Name="documentsCollection"
+                            ItemsSource="{Binding Documents}"
+                            SelectionMode="Single"
+                            HeightRequest="250"
+                            FlexLayout.Grow="1"
+                            >
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="6" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border>
+                                        <FlyoutBase.ContextFlyout>
+                                            <MenuFlyout>
+                                                <MenuFlyoutItem x:Name="DeleteContextMenuItem" Text="Delete" Clicked="DeleteDocumentContextMenuItemClicked" CommandParameter="{Binding .}" />
+                                            </MenuFlyout>
+                                        </FlyoutBase.ContextFlyout>
+                                        <Label Text="{Binding .}" FontSize="Body" Margin="16" >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="DocumentDoubleTapped" NumberOfTapsRequired="2" CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers> 
+                                        </Label>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Border>
+            </FlexLayout>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

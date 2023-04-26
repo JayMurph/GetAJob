@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ApplicationOrganizer.MainPage"
+            xmlns:local="clr-namespace:ApplicationOrganizer"
+             >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="NewApplicationButtonClicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <local:ApplicationStatusToStringConverter x:Key="StatusToSTring" />
+    </ContentPage.Resources>
+
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30"
+            >
+            <Label
+                Text="Get a Job"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" 
+                />
+            <Image
+                Source="murph.jpg"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+        <Border>
+            <CollectionView x:Name="applicationsCollection"
+            ItemsSource="{Binding JobApplications}"
+            SelectionMode="Single"
+            HeightRequest="350"
+                            SelectionChanged="ApplicationSelectionChanged">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border>
+                            <FlyoutBase.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem x:Name="DeleteContextMenuItem" Text="Delete" Clicked="DeleteContextMenuItemClicked" CommandParameter="{Binding .}" />
+                                </MenuFlyout>
+                            </FlyoutBase.ContextFlyout>
+                        <Grid>
+                            <Label Text="{Binding Title}" FontSize="Medium" Margin="16"/>
+                            <Label Text="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" VerticalTextAlignment="Center" HorizontalOptions="End" Margin="16">
+                                <Label.Style>
+                                    <Style TargetType="Label">
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="New">
+                                                <Setter Property="TextColor" Value="LightGreen"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="Submitted">
+                                                <Setter Property="TextColor" Value="CadetBlue"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="Rejected">
+                                                <Setter Property="TextColor" Value="Red"/>
+                                                <Setter Property="FontAttributes" Value="Bold"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="Accepted">
+                                                <Setter Property="TextColor" Value="Green"/>
+                                                <Setter Property="FontAttributes" Value="Bold"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="Interviewing">
+                                                <Setter Property="TextColor" Value="Orange"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Label.Style> 
+                            </Label>
+                        </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
+        </VerticalStackLayout>
+</ContentPage>
