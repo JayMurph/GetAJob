@@ -1,1 +1,1 @@
-﻿dotnet publish -f net7.0-windows10.0.19041.0 -sc -c Release -r win10-x84
+﻿dotnet publish ApplicationOrganizer.csproj -f net7.0-windows10.0.19041.0 --sc -c Release -r win10-x86
