@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -12,10 +11,10 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>ApplicationOrganizer</ApplicationTitle>
+		<ApplicationTitle>Get A Job</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.applicationorganizer</ApplicationId>
+		<ApplicationId>com.jaymu.getajob</ApplicationId>
 		<ApplicationIdGuid>5aa74620-cb8e-497e-8b0c-9bbcdd595f10</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -34,46 +33,56 @@
 		<Company>JayMurph</Company>
 		<Authors>Joshua Murphy</Authors>
 		<Description>Job application organizer</Description>
+		<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+		<PackageCertificateThumbprint>AAE49753158F411A2F41F3EECD3025F2E37EC7EC</PackageCertificateThumbprint>
+		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+		<AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+		<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+		<GenerateTestArtifacts>True</GenerateTestArtifacts>
+		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<PackageId>GetAJob</PackageId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
 	  <ApplicationTitle>Get A Job</ApplicationTitle>
-	  <ApplicationId>com.companyname.getajob</ApplicationId>
+	  <ApplicationId>com.jaymu.getajob</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationTitle>Get A Job</ApplicationTitle>
-	  <ApplicationId>com.companyname.getajob</ApplicationId>
+	  <ApplicationId>com.jaymu.getajob</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|x64'">
 	  <ApplicationTitle>Get A Job</ApplicationTitle>
-	  <ApplicationId>com.companyname.getajob</ApplicationId>
+	  <ApplicationId>com.jaymu.getajob</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|x64'">
 	  <ApplicationTitle>Get A Job</ApplicationTitle>
-	  <ApplicationId>com.companyname.getajob</ApplicationId>
+	  <ApplicationId>com.jaymu.getajob</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|AnyCPU'">
 	  <ApplicationTitle>Get A Job</ApplicationTitle>
-	  <ApplicationId>com.companyname.getajob</ApplicationId>
+	  <ApplicationId>com.jaymu.getajob</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationTitle>Get A Job</ApplicationTitle>
-	  <ApplicationId>com.companyname.getajob</ApplicationId>
+	  <ApplicationId>com.jaymu.getajob</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|x64'">
 	  <ApplicationTitle>Get A Job</ApplicationTitle>
-	  <ApplicationId>com.companyname.getajob</ApplicationId>
+	  <ApplicationId>com.jaymu.getajob</ApplicationId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.19041.0|x64'">
 	  <ApplicationTitle>Get A Job</ApplicationTitle>
-	  <ApplicationId>com.companyname.getajob</ApplicationId>
+	  <ApplicationId>com.jaymu.getajob</ApplicationId>
 	</PropertyGroup>
 
 	<ItemGroup>
