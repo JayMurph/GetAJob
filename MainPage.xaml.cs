@@ -8,11 +8,13 @@ namespace ApplicationOrganizer;
 public partial class MainPage : ContentPage
 {
     private string _dataPath = FileSystem.AppDataDirectory;
+    private AllApplications _allApplications;
 
-    public MainPage()
+    public MainPage(AllApplications allApplications)
     {
         InitializeComponent();
-        BindingContext = App.AllApplications;
+        _allApplications = allApplications;
+        BindingContext = allApplications;
     }
 
     /// <summary>
@@ -33,7 +35,7 @@ public partial class MainPage : ContentPage
     private async void NewApplicationButtonClicked(object sender, EventArgs e)
     {
         // get name of new job applcation
-        string result = await DisplayPromptAsync("New Job Application", "Title", maxLength: 24, accept: "Create");
+        string result = await DisplayPromptAsync("New Job Application", "Title", maxLength: 32, accept: "Create");
         if (result != null)
         {
             string path = Path.Combine(_dataPath, result);
@@ -43,8 +45,11 @@ public partial class MainPage : ContentPage
 
                 if (newJobApp != null)
                 {
-                    ((AllApplications)BindingContext).JobApplications.Add(newJobApp);
-                    await Shell.Current.GoToAsync($"{nameof(ApplicationPage)}?{nameof(ApplicationPage.ApplicationTitle)}={newJobApp.Title}");
+                    _allApplications.JobApplications.Add(newJobApp);
+                    await Shell.Current.GoToAsync(nameof(ApplicationPage), true, new Dictionary<string, object>()
+                    {
+                        { "JobApplication", newJobApp } 
+                    });
                 }
                 else
                 {
@@ -90,7 +95,10 @@ public partial class MainPage : ContentPage
         if (e.CurrentSelection.Count != 0 )
         {
             var app = (JobApplication)e.CurrentSelection[0];
-            await Shell.Current.GoToAsync($"{nameof(ApplicationPage)}?{nameof(ApplicationPage.ApplicationTitle)}={app.Title}");
+            await Shell.Current.GoToAsync(nameof(ApplicationPage), true, new Dictionary<string, object>()
+            {
+                { "JobApplication", app} 
+            });
         }
     }
 
@@ -111,7 +119,7 @@ public partial class MainPage : ContentPage
                 try
                 {
                     Directory.Delete(toDelete, true);
-                    App.AllApplications.JobApplications.Remove(item);
+                    _allApplications.JobApplications.Remove(item);
                 }
                 catch(Exception ex)
                 {

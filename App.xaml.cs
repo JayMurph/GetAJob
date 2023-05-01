@@ -2,7 +2,6 @@
 
 public partial class App : Application
 {
-	internal static AllApplications AllApplications = new AllApplications();
 	public App()
 	{
 		InitializeComponent();

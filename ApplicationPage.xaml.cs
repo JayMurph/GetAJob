@@ -6,24 +6,24 @@ namespace ApplicationOrganizer;
 /// <summary>
 /// Page that allows editing info for a Job Application
 /// </summary>
-[QueryProperty(nameof(ApplicationTitle), nameof(ApplicationTitle))]
+[QueryProperty(nameof(JobApplication), nameof(JobApplication))]
 public partial class ApplicationPage : ContentPage
 {
     public ObservableCollection<ApplicationStatus> Statuses { get; set; } = new ObservableCollection<ApplicationStatus>(Enum.GetValues<ApplicationStatus>().ToList());
-
-    public string ApplicationTitle
-    {
-        set
-        {
-            _jobApplication = App.AllApplications.JobApplications.Where(app => app.Title == value).FirstOrDefault();
-            BindingContext = _jobApplication;
-        }
-    }
 
     /// <summary>
     /// Model for the page
     /// </summary>
     private JobApplication _jobApplication;
+    public JobApplication JobApplication
+    {
+        get => _jobApplication;
+        set
+        {
+            _jobApplication = value;
+            BindingContext = _jobApplication;
+        }
+    }
 
     public ApplicationPage()
     {

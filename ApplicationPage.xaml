@@ -5,6 +5,7 @@ x:Name="applicationPage"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:ApplicationOrganizer"
     x:Class="ApplicationOrganizer.ApplicationPage"
+    x:DataType="local:JobApplication"
      Title="{Binding Title}"
     >
     <ContentPage.Resources>
