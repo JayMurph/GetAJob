@@ -66,7 +66,7 @@ x:Name="applicationPage"
                                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="6" />
                             </CollectionView.ItemsLayout>
                             <CollectionView.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate x:DataType="x:String">
                                     <Border>
                                         <FlyoutBase.ContextFlyout>
                                             <MenuFlyout>
