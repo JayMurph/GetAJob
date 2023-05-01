@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ApplicationOrganizer.MainPage"
             xmlns:local="clr-namespace:ApplicationOrganizer"
+            x:DataType="local:AllApplications"
              >
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="NewApplicationButtonClicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
@@ -18,7 +19,7 @@
             <Label
                 Text="Get a Job"
                 SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
+                FontSize="Header"
                 HorizontalOptions="Center" 
                 />
             <Image
@@ -37,7 +38,7 @@
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="local:JobApplication">
                         <Border>
                             <FlyoutBase.ContextFlyout>
                                 <MenuFlyout>

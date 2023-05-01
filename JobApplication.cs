@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -9,7 +10,7 @@ namespace ApplicationOrganizer
     /// <summary>
     /// Encapsulates info related to a job application. Notifies of property changes
     /// </summary>
-    public class JobApplication : INotifyPropertyChanged
+    public partial class JobApplication : ObservableObject
     {
         public const string APPLICATION_MANIFEST_FILENAME = "application_manifest.json";
 
@@ -23,127 +24,30 @@ namespace ApplicationOrganizer
         /// </summary>
         public ObservableCollection<string> Documents { get; set; } = new ObservableCollection<string>();
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public string Title
-        {
-            get => _title;
-            set
-            {
-                if (_title != value)
-                {
-                    _title = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
+        [ObservableProperty]
         private string _title;
 
-        public string CompanyName
-        {
-            get => _companyName;
-            set
-            {
-                if (_companyName != value)
-                {
-                    _companyName = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
+        [ObservableProperty]
         private string _companyName;
 
-        public string ContactInfo
-        {
-            get => _contactInfo;
-            set
-            {
-                if (_contactInfo != value)
-                {
-                    _contactInfo = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
+        [ObservableProperty]
         private string _contactInfo;
 
-        public string OtherInfo
-        {
-            get => _otherInfo;
-            set
-            {
-                if (value != _otherInfo)
-                {
-                    _otherInfo = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
+        [ObservableProperty]
         private string _otherInfo;
 
-        public DateTime DateApplied
-        {
-            get => _dateApplied;
-            set
-            {
-                if (_dateApplied != value)
-                {
-                    _dateApplied = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
+        [ObservableProperty]
         private DateTime _dateApplied = DateTime.Today.AddDays(-1);
 
-        public DateTime Interview
-        {
-            get => _interview;
-            set
-            {
-                if (_interview != value)
-                {
-                    _interview = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
+        [ObservableProperty]
         private DateTime _interview = DateTime.Today.AddDays(-1);
 
-        public DateTime DueDate
-        {
-            get => _dueDate;
-            set
-            {
-                if (_dueDate != value)
-                {
-                    _dueDate = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
+        [ObservableProperty]
         private DateTime _dueDate = DateTime.Today.AddDays(7);
 
-        public ApplicationStatus Status
-        {
-            get => _status;
-            set
-            {
-                if (_status != value)
-                {
-                    _status = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
+        [ObservableProperty]
         private ApplicationStatus _status = ApplicationStatus.New;
+
         private DirectoryInfo _documentsDir;
 
         /// <summary>
@@ -277,15 +181,6 @@ namespace ApplicationOrganizer
                 Debug.WriteLine(ex.Message);
                 return false;
             }
-        }
-
-        /// <summary>
-        /// Invokes the property changed method
-        /// </summary>
-        /// <param name="propertyName">Name of a property that changed</param>
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

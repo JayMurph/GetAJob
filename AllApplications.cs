@@ -1,11 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace ApplicationOrganizer
 {
     /// <summary>
     /// Loads and collects all JobApplications for the program, for the app data directory
     /// </summary>
-    internal class AllApplications
+    public class AllApplications
     {
         /// <summary>
         /// All JobApplications used in the program
