@@ -27,7 +27,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<Platforms>AnyCPU;x64</Platforms>
+		<Platforms>AnyCPU</Platforms>
 		<Title>Get A Job</Title>
 		<AssemblyName>GetAJob</AssemblyName>
 		<Company>JayMurph</Company>
@@ -43,6 +43,8 @@
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 		<PlatformTarget>AnyCPU</PlatformTarget>
 		<PackageId>GetAJob</PackageId>
+		<FileVersion>1.1</FileVersion>
+		<AssemblyVersion>1.1</AssemblyVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|AnyCPU'">
@@ -53,14 +55,10 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationTitle>Get A Job</ApplicationTitle>
 	  <ApplicationId>com.jaymu.getajob</ApplicationId>
+	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-maccatalyst|x64'">
-	  <ApplicationTitle>Get A Job</ApplicationTitle>
-	  <ApplicationId>com.jaymu.getajob</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-windows10.0.19041.0|x64'">
 	  <ApplicationTitle>Get A Job</ApplicationTitle>
 	  <ApplicationId>com.jaymu.getajob</ApplicationId>
 	</PropertyGroup>
@@ -73,14 +71,10 @@
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.19041.0|AnyCPU'">
 	  <ApplicationTitle>Get A Job</ApplicationTitle>
 	  <ApplicationId>com.jaymu.getajob</ApplicationId>
+	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-maccatalyst|x64'">
-	  <ApplicationTitle>Get A Job</ApplicationTitle>
-	  <ApplicationId>com.jaymu.getajob</ApplicationId>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-windows10.0.19041.0|x64'">
 	  <ApplicationTitle>Get A Job</ApplicationTitle>
 	  <ApplicationId>com.jaymu.getajob</ApplicationId>
 	</PropertyGroup>
