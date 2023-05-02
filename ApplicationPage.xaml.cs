@@ -145,4 +145,9 @@ public partial class ApplicationPage : ContentPage
     {
         Process.Start("explorer.exe", new[] { Path.Combine(_jobApplication.Path, e.Parameter as string) });
     }
+
+    private void ViewContextMenuItem_Clicked(object sender, EventArgs e)
+    {
+        Process.Start("explorer.exe", new[] { Path.Combine(_jobApplication.Path, (sender as MenuFlyoutItem).CommandParameter as string) });
+    }
 }
