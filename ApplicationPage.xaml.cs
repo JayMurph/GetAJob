@@ -37,7 +37,7 @@ public partial class ApplicationPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await _jobApplication.Load(this.Dispatcher);
+        await _jobApplication.Load();
         Dispatcher.Dispatch(new Action(() =>
         {
             BindingContext = _jobApplication;

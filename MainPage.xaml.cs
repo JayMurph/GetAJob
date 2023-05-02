@@ -23,7 +23,7 @@ public partial class MainPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await ((AllApplications)BindingContext).LoadApplications(Dispatcher);
+        await ((AllApplications)BindingContext).LoadApplications();
     }
 
     /// <summary>

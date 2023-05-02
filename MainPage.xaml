@@ -21,11 +21,25 @@
                 FontSize="Header"
                 HorizontalOptions="Center" 
                 />
+        <Grid ColumnDefinitions="*,*">
             <Image
                 Source="murph.jpg"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="200"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center" 
+                Grid.Column="0"
+                />
+            <VerticalStackLayout Grid.Column="1" Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="Application Stats" FontSize="Title"/>
+                <Grid ColumnDefinitions="4*,*" RowDefinitions="*,*,*">
+                    <Label Text="Created" FontSize="Subtitle" Grid.Row="0" Grid.Column="0"/>
+                    <Label Text="{Binding ApplicationsCreated}" FontSize="Subtitle" Grid.Row="0" Grid.Column="1"/>
+                    <Label Text="Submitted" FontSize="Subtitle" Grid.Row="1" Grid.Column="0"/>
+                    <Label Text="{Binding ApplicationsSubmitted}" FontSize="Subtitle" Grid.Row="1" Grid.Column="2"/>
+                    <Label Text="Rejected" FontSize="Subtitle" Grid.Row="2" Grid.Column="0"/>
+                    <Label Text="{Binding ApplicationsRejected}" FontSize="Subtitle" Grid.Row="2" Grid.Column="3"/>
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
 
         <Border>
             <CollectionView x:Name="applicationsCollection"

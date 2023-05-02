@@ -72,7 +72,7 @@ namespace ApplicationOrganizer
         /// </summary>
         /// <param name="dispatcher">For invoking property changes</param>
         /// <returns>Task</returns>
-        public async Task Load(IDispatcher dispatcher)
+        public async Task Load()
         {
             var files = _documentsDir.GetFiles();
             var manifestFile = files.Where(info => info.Name == APPLICATION_MANIFEST_FILENAME).FirstOrDefault();
@@ -82,7 +82,7 @@ namespace ApplicationOrganizer
             }
             else
             {
-                await InitializeFromManifest(dispatcher);
+                await InitializeFromManifest();
             }
 
             Documents.Clear();
@@ -98,23 +98,20 @@ namespace ApplicationOrganizer
         /// </summary>
         /// <param name="dispatcher">For invoking property changes</param>
         /// <returns>Task</returns>
-        private async Task InitializeFromManifest(IDispatcher dispatcher)
+        private async Task InitializeFromManifest()
         {
             try
             {
                 using (var stream = File.OpenRead(System.IO.Path.Combine(Path, APPLICATION_MANIFEST_FILENAME)))
                 {
                     JobApplicationDAL dal = (JobApplicationDAL)await JsonSerializer.DeserializeAsync(stream, typeof(JobApplicationDAL));
-                    dispatcher.Dispatch(() =>
-                    {
-                        CompanyName = dal.CompanyName;
-                        ContactInfo = dal.ContactInfo;
-                        OtherInfo = dal.OtherInfo;
-                        DateApplied = dal.DateApplied;
-                        Interview = dal.Interview;
-                        Status = dal.Status;
-                        DueDate = dal.DueDate;
-                    });
+                    CompanyName = dal.CompanyName;
+                    ContactInfo = dal.ContactInfo;
+                    OtherInfo = dal.OtherInfo;
+                    DateApplied = dal.DateApplied;
+                    Interview = dal.Interview;
+                    Status = dal.Status;
+                    DueDate = dal.DueDate;
                 }
             }
             catch (Exception ex)
