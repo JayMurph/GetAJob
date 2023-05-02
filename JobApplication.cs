@@ -37,6 +37,9 @@ namespace ApplicationOrganizer
         private string _otherInfo;
 
         [ObservableProperty]
+        private string _position;
+
+        [ObservableProperty]
         private DateTime _dateApplied = DateTime.Today.AddDays(-1);
 
         [ObservableProperty]
@@ -120,6 +123,7 @@ namespace ApplicationOrganizer
                 CompanyName = dal.CompanyName;
                 ContactInfo = dal.ContactInfo;
                 OtherInfo = dal.OtherInfo;
+                Position = dal.Position;
                 DateApplied = dal.DateApplied;
                 Interview = dal.Interview;
                 Status = dal.Status;
@@ -161,18 +165,23 @@ namespace ApplicationOrganizer
             }
         }
 
+        public async Task<bool> Write()
+        {
+            return await Write(APPLICATION_MANIFEST_FILENAME);
+        }
 
         /// <summary>
         /// Writes the properties of the Job Application to its manifest file
         /// </summary>
         /// <returns>Indicates if changes were written successfully</returns>
-        public async Task<bool> Write()
+        public async Task<bool> Write(string manifestFilename)
         {
             var dal = new JobApplicationDAL()
             {
                 CompanyName = CompanyName,
                 ContactInfo = ContactInfo,
                 OtherInfo = OtherInfo,
+                Position = Position,
                 DateApplied = DateApplied,
                 Interview = Interview,
                 Status = Status,
@@ -181,7 +190,7 @@ namespace ApplicationOrganizer
 
             try
             {
-                using var stream = File.Open(System.IO.Path.Combine(Path, APPLICATION_MANIFEST_FILENAME), FileMode.Truncate);
+                using var stream = File.Open(System.IO.Path.Combine(Path, manifestFilename), FileMode.Truncate);
                 await JsonSerializer.SerializeAsync<JobApplicationDAL>(stream, dal);
                 return true;
             }

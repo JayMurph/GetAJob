@@ -8,6 +8,7 @@
         public string CompanyName { get; set; }
         public string ContactInfo { get; set; }
         public string OtherInfo { get; set; }
+        public string Position { get; set; }
         public DateTime DateApplied { get; set; } = DateTime.Today.AddDays(-1);
         public DateTime Interview { get; set; } = DateTime.Today.AddDays(-1);
         public DateTime DueDate { get; set; } = DateTime.Today.AddDays(7);

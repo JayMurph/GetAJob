@@ -20,30 +20,32 @@ x:Name="applicationPage"
         </Grid>
         <Grid ColumnDefinitions="*,*" Margin="0,16,0,0" ColumnSpacing="24" HeightRequest="500">
             <FlexLayout Grid.Column="0" Direction="Column" FlexLayout.Grow="1" AlignContent="Start">
-                    <Label Text="Company" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="0" HorizontalTextAlignment="Start" Margin="0,8,0,0"/>
-                    <Entry x:Name="CompanyNameEditor"
-                    FontSize="Medium"
-                    Text="{Binding CompanyName}"
-                    Placeholder="Company Name"
-                    MaxLength="128"
-                    Grid.Column="1" />
-                    <Label Text="Contact" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="1" HorizontalOptions="Start" Margin="0,8,0,0"/>
-                    <Entry x:Name="ContactInfoEditor"
-                    Grid.Column="1"
-                    Grid.Row="1"
-                    FontSize="Medium"
-                    Text="{Binding ContactInfo}"
-                    Placeholder="Contact Info"
-                    MaxLength="128" />
-                    <Label Text="Info" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="2" HorizontalOptions="Start" Margin="0,8,0,0"/>
-                    <Editor x:Name="OtherInfoEditor"
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    FontSize="Medium"
-                    Text="{Binding OtherInfo}"
-                    Placeholder="Info"
-                    FlexLayout.Grow="1"
-                    />
+                <Label Text="Company" FontSize="Subtitle" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Margin="0,8,0,0"/>
+                <Entry x:Name="CompanyNameEditor"
+                FontSize="Medium"
+                Text="{Binding CompanyName}"
+                Placeholder="Company Name"
+                MaxLength="128"
+                />
+                <Label Text="Contact" FontSize="Subtitle" VerticalTextAlignment="Center" HorizontalOptions="Start" Margin="0,8,0,0"/>
+                <Entry x:Name="ContactInfoEditor"
+                FontSize="Medium"
+                Text="{Binding ContactInfo}"
+                Placeholder="Contact Info"
+                MaxLength="128" />
+                <Label Text="Position" FontSize="Subtitle" VerticalTextAlignment="Center" HorizontalOptions="Start" Margin="0,8,0,0"/>
+                <Entry x:Name="PositionEditor"
+                FontSize="Medium"
+                Text="{Binding Position}"
+                Placeholder="Position"
+                MaxLength="128" />
+                <Label Text="Info" FontSize="Subtitle" VerticalTextAlignment="Center" HorizontalOptions="Start" Margin="0,8,0,0"/>
+                <Editor x:Name="OtherInfoEditor"
+                FontSize="Medium"
+                Text="{Binding OtherInfo}"
+                Placeholder="Info"
+                FlexLayout.Grow="1"
+                />
             </FlexLayout>
             <FlexLayout Grid.Column="1" Direction="Column" AlignContent="Start">
                 <Label FontSize="Subtitle" HorizontalOptions="Center">Documents</Label>
