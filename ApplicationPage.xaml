@@ -8,9 +8,6 @@ x:Name="applicationPage"
     x:DataType="local:JobApplication"
      Title="{Binding Title}"
     >
-    <ContentPage.Resources>
-        <local:ApplicationStatusToStringConverter x:Key="StatusToSTring" />
-    </ContentPage.Resources>
     <VerticalStackLayout Spacing="10" Margin="32" WidthRequest="800">
         <Picker x:Name="StatusPicker" WidthRequest="200" SelectedItem="{Binding Status}" ItemsSource="{Binding Source={x:Reference applicationPage}, Path=Statuses, ConverterParameter={StaticResource StatusToSTring}}" />
         <Grid HorizontalOptions="Center" ColumnDefinitions="150,150,150" RowDefinitions="*,*">

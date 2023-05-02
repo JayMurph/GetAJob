@@ -19,6 +19,8 @@ namespace ApplicationOrganizer
         private int _applicationsSubmitted;
         [ObservableProperty]
         private int _applicationsRejected;
+        [ObservableProperty]
+        private int _applicationsInterviewed;
 
 
         /// <summary>
@@ -48,6 +50,7 @@ namespace ApplicationOrganizer
             ApplicationsCreated = JobApplications.Count;
             ApplicationsSubmitted = JobApplications.Where(app => app.Status != ApplicationStatus.New).Count();
             ApplicationsRejected = JobApplications.Where(app => app.Status == ApplicationStatus.Rejected).Count();
+            ApplicationsInterviewed = JobApplications.Where(app => app.Status == ApplicationStatus.Interviewing).Count();
         }
     }
 }

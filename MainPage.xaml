@@ -3,40 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ApplicationOrganizer.MainPage"
             xmlns:local="clr-namespace:ApplicationOrganizer"
-            x:DataType="local:AllApplications"
-             >
+            x:DataType="local:AllApplications">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="NewApplicationButtonClicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
     </ContentPage.ToolbarItems>
-    <ContentPage.Resources>
-        <local:ApplicationStatusToStringConverter x:Key="StatusToSTring" />
-    </ContentPage.Resources>
-        <VerticalStackLayout
+    <VerticalStackLayout
             Spacing="25"
-            Padding="30"
-            >
-            <Label
+            Padding="30">
+        <Label
                 Text="Get a Job"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="Header"
-                HorizontalOptions="Center" 
-                />
+                HorizontalOptions="Center" />
         <Grid ColumnDefinitions="*,*">
             <Image
                 Source="murph.jpg"
                 HeightRequest="200"
-                HorizontalOptions="Center" 
-                Grid.Column="0"
-                />
+                HorizontalOptions="Center"
+                Grid.Column="0" />
             <VerticalStackLayout Grid.Column="1" Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
                 <Label Text="Application Stats" FontSize="Title"/>
-                <Grid ColumnDefinitions="4*,*" RowDefinitions="*,*,*">
-                    <Label Text="Created" FontSize="Subtitle" Grid.Row="0" Grid.Column="0"/>
-                    <Label Text="{Binding ApplicationsCreated}" FontSize="Subtitle" Grid.Row="0" Grid.Column="1"/>
-                    <Label Text="Submitted" FontSize="Subtitle" Grid.Row="1" Grid.Column="0"/>
-                    <Label Text="{Binding ApplicationsSubmitted}" FontSize="Subtitle" Grid.Row="1" Grid.Column="2"/>
-                    <Label Text="Rejected" FontSize="Subtitle" Grid.Row="2" Grid.Column="0"/>
-                    <Label Text="{Binding ApplicationsRejected}" FontSize="Subtitle" Grid.Row="2" Grid.Column="3"/>
+                <Grid ColumnDefinitions="3*,*" RowDefinitions="*,*,*,*" ColumnSpacing="16" HorizontalOptions="Center">
+                    <Label Text="Created" FontSize="Subtitle" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="End" />
+                    <Label Text="{Binding ApplicationsCreated}" FontSize="Subtitle" Grid.Row="0" Grid.Column="1" TextColor="{DynamicResource NewStatusColor}" />
+                    <Label Text="Submitted" FontSize="Subtitle" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="End"/>
+                    <Label Text="{Binding ApplicationsSubmitted}" FontSize="Subtitle" Grid.Row="1" Grid.Column="1" TextColor="{DynamicResource SubmittedStatusColor}" />
+                    <Label Text="Interviewed" FontSize="Subtitle" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="End"/>
+                    <Label Text="{Binding ApplicationsInterviewed}" FontSize="Subtitle" Grid.Row="2" Grid.Column="1" TextColor="{DynamicResource InterviewingStatusColor}" />
+                    <Label Text="Rejected" FontSize="Subtitle" Grid.Row="3" Grid.Column="0" HorizontalTextAlignment="End"/>
+                    <Label Text="{Binding ApplicationsRejected}" FontSize="Subtitle" Grid.Row="3" Grid.Column="1" TextColor="{DynamicResource RejectedStatusColor}" />
                 </Grid>
             </VerticalStackLayout>
         </Grid>
@@ -48,7 +43,7 @@
             HeightRequest="350"
                             SelectionChanged="ApplicationSelectionChanged">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"/>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="local:JobApplication">
@@ -58,38 +53,14 @@
                                     <MenuFlyoutItem x:Name="DeleteContextMenuItem" Text="Delete" Clicked="DeleteContextMenuItemClicked" CommandParameter="{Binding .}" />
                                 </MenuFlyout>
                             </FlyoutBase.ContextFlyout>
-                        <Grid>
-                            <Label Text="{Binding Title}" FontSize="Medium" Margin="16"/>
-                            <Label Text="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" VerticalTextAlignment="Center" HorizontalOptions="End" Margin="16">
-                                <Label.Style>
-                                    <Style TargetType="Label">
-                                        <Style.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="New">
-                                                <Setter Property="TextColor" Value="LightGreen"/>
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="Submitted">
-                                                <Setter Property="TextColor" Value="CadetBlue"/>
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="Rejected">
-                                                <Setter Property="TextColor" Value="Red"/>
-                                                <Setter Property="FontAttributes" Value="Bold"/>
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="Accepted">
-                                                <Setter Property="TextColor" Value="Green"/>
-                                                <Setter Property="FontAttributes" Value="Bold"/>
-                                            </DataTrigger>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="Interviewing">
-                                                <Setter Property="TextColor" Value="Orange"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Label.Style> 
-                            </Label>
-                        </Grid>
+                            <Grid>
+                                <Label Text="{Binding Title}" FontSize="Medium" Margin="16" />
+                                <Label StyleClass="ApplicationStatusLabel" Text="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" VerticalTextAlignment="Center" HorizontalOptions="End" Margin="16" />
+                            </Grid>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Border>
-        </VerticalStackLayout>
+    </VerticalStackLayout>
 </ContentPage>
