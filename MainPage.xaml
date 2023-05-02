@@ -7,41 +7,39 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="NewApplicationButtonClicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
     </ContentPage.ToolbarItems>
-    <VerticalStackLayout
-            Spacing="25"
-            Padding="30">
-        <Label
-                Text="Get a Job"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="Header"
-                HorizontalOptions="Center" />
+    <VerticalStackLayout Spacing="25" Padding="10,0,10,10">
+        <Image
+            Source="get_a_job_logo.png"
+            HeightRequest="130"
+            HorizontalOptions="Center"
+            ScaleX="1.5"
+            />
         <Grid ColumnDefinitions="*,*">
             <Image
-                Source="murph.jpg"
+                Source="get_a_job_guy.png"
                 HeightRequest="200"
                 HorizontalOptions="Center"
                 Grid.Column="0" />
             <VerticalStackLayout Grid.Column="1" Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
-                <Label Text="Application Stats" FontSize="Title"/>
-                <Grid ColumnDefinitions="3*,*" RowDefinitions="*,*,*,*" ColumnSpacing="16" HorizontalOptions="Center">
+                <Label Text="Application Stats" FontSize="Title" />
+                <Grid ColumnDefinitions="3*,*" RowDefinitions="*,*,*,*" ColumnSpacing="16" HorizontalOptions="Center" MinimumWidthRequest="150">
                     <Label Text="Created" FontSize="Subtitle" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="End" />
                     <Label Text="{Binding ApplicationsCreated}" FontSize="Subtitle" Grid.Row="0" Grid.Column="1" TextColor="{StaticResource NewStatusColor}" />
-                    <Label Text="Submitted" FontSize="Subtitle" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="End"/>
+                    <Label Text="Submitted" FontSize="Subtitle" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="End" />
                     <Label Text="{Binding ApplicationsSubmitted}" FontSize="Subtitle" Grid.Row="1" Grid.Column="1" TextColor="{StaticResource SubmittedStatusColor}" />
-                    <Label Text="Interviewed" FontSize="Subtitle" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="End"/>
+                    <Label Text="Interviewed" FontSize="Subtitle" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="End" />
                     <Label Text="{Binding ApplicationsInterviewed}" FontSize="Subtitle" Grid.Row="2" Grid.Column="1" TextColor="{StaticResource InterviewingStatusColor}" />
-                    <Label Text="Rejected" FontSize="Subtitle" Grid.Row="3" Grid.Column="0" HorizontalTextAlignment="End"/>
+                    <Label Text="Rejected" FontSize="Subtitle" Grid.Row="3" Grid.Column="0" HorizontalTextAlignment="End" />
                     <Label Text="{Binding ApplicationsRejected}" FontSize="Subtitle" Grid.Row="3" Grid.Column="1" TextColor="{StaticResource RejectedStatusColor}" />
                 </Grid>
             </VerticalStackLayout>
         </Grid>
-
         <Border>
             <CollectionView x:Name="applicationsCollection"
-            ItemsSource="{Binding JobApplications}"
-            SelectionMode="Single"
-            HeightRequest="350"
-                            SelectionChanged="ApplicationSelectionChanged">
+                ItemsSource="{Binding JobApplications}"
+                SelectionMode="Single"
+                HeightRequest="350"
+                SelectionChanged="ApplicationSelectionChanged">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                 </CollectionView.ItemsLayout>
