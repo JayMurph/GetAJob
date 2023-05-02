@@ -98,7 +98,34 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AutoGen\AppIcon.scale-100.png" />
+	  <None Remove="Resources\AutoGen\AppIcon.scale-200.png" />
+	  <None Remove="Resources\AutoGen\AppIcon.scale-400.png" />
+	  <None Remove="Resources\AutoGen\PackageLogo.scale-100.png" />
+	  <None Remove="Resources\AutoGen\PackageLogo.scale-200.png" />
+	  <None Remove="Resources\AutoGen\PackageLogo.scale-400.png" />
+	  <None Remove="Resources\AutoGen\SmallTIle.scale-100.png" />
+	  <None Remove="Resources\AutoGen\SmallTIle.scale-200.png" />
+	  <None Remove="Resources\AutoGen\SmallTIle.scale-400.png" />
+	  <None Remove="Resources\AutoGen\SplashScreen.scale-100.png" />
+	  <None Remove="Resources\AutoGen\SplashScreen.scale-200.png" />
+	  <None Remove="Resources\AutoGen\SplashScreen.scale-400.png" />
 	  <None Remove="Resources\Images\murph.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Resources\AutoGen\AppIcon.scale-100.png" />
+	  <Content Include="Resources\AutoGen\AppIcon.scale-200.png" />
+	  <Content Include="Resources\AutoGen\AppIcon.scale-400.png" />
+	  <Content Include="Resources\AutoGen\PackageLogo.scale-100.png" />
+	  <Content Include="Resources\AutoGen\PackageLogo.scale-200.png" />
+	  <Content Include="Resources\AutoGen\PackageLogo.scale-400.png" />
+	  <Content Include="Resources\AutoGen\SmallTIle.scale-100.png" />
+	  <Content Include="Resources\AutoGen\SmallTIle.scale-200.png" />
+	  <Content Include="Resources\AutoGen\SmallTIle.scale-400.png" />
+	  <Content Include="Resources\AutoGen\SplashScreen.scale-100.png" />
+	  <Content Include="Resources\AutoGen\SplashScreen.scale-200.png" />
+	  <Content Include="Resources\AutoGen\SplashScreen.scale-400.png" />
 	</ItemGroup>
 
 	<ItemGroup>
