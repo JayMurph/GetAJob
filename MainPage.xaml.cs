@@ -51,7 +51,7 @@ public partial class MainPage : ContentPage
                     _allApplications.JobApplications.Add(newJobApp);
                     await Shell.Current.GoToAsync(nameof(ApplicationPage), true, new Dictionary<string, object>()
                     {
-                        { "JobApplication", newJobApp } 
+                        { "JobApplication", newJobApp }
                     });
                 }
                 else
@@ -80,7 +80,7 @@ public partial class MainPage : ContentPage
                 Directory.CreateDirectory(path);
                 return new JobApplication(path);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
                 return null;
@@ -95,13 +95,20 @@ public partial class MainPage : ContentPage
     /// <param name="e">Contains info about selection</param>
     private async void ApplicationSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (e.CurrentSelection.Count != 0 )
+        if (e.CurrentSelection.Count != 0)
         {
             var app = (JobApplication)e.CurrentSelection[0];
-            await Shell.Current.GoToAsync(nameof(ApplicationPage), true, new Dictionary<string, object>()
+            if (await app.Load())
             {
-                { "JobApplication", app} 
-            });
+                await Shell.Current.GoToAsync(nameof(ApplicationPage), true, new Dictionary<string, object>()
+                {
+                    { "JobApplication", app}
+                });
+            }
+            else
+            {
+                await DisplayAlert("Error", "Unable to load Application data", "OK");
+            }
         }
     }
 
@@ -117,14 +124,14 @@ public partial class MainPage : ContentPage
 
         if (Directory.Exists(toDelete))
         {
-            if(await DisplayAlert("Confirm", $"Are you sure that you would like to delete {item.Title}", "OK", "Cancel", FlowDirection.LeftToRight) != false)
+            if (await DisplayAlert("Confirm", $"Are you sure that you would like to delete {item.Title}", "OK", "Cancel", FlowDirection.LeftToRight) != false)
             {
                 try
                 {
                     Directory.Delete(toDelete, true);
                     _allApplications.JobApplications.Remove(item);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
                     await DisplayAlert("Error", "An error occurred", "OK");

@@ -32,29 +32,19 @@ public partial class ApplicationPage : ContentPage
         BindingContext = _jobApplication;
     }
 
-    /// <summary>
-    /// Initializes job application model
-    /// </summary>
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
         base.OnAppearing();
-        if (await _jobApplication.Load() == false)
-        {
-            await DisplayAlert("Error", "Unable to load Application data", "OK");
-            await Shell.Current.GoToAsync(nameof(MainPage));
-        }
-
         BindingContext = _jobApplication;
     }
 
-    /// <summary>
-    /// Writes job application changes to file
-    /// </summary>
-    /// <param name="args"></param>
-    protected override async void OnNavigatingFrom(NavigatingFromEventArgs args)
+    protected override async void OnDisappearing()
     {
-        base.OnNavigatingFrom(args);
-        await _jobApplication.Write();
+        base.OnDisappearing();
+        if (!await _jobApplication.Write())
+        {
+            Task.Run(async () => await DisplayAlert("Error", "Unable to save Application changes", "OK"));
+        }
     }
 
     /// <summary>
