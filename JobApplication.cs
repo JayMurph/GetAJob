@@ -48,7 +48,7 @@ namespace ApplicationOrganizer
         [ObservableProperty]
         private ApplicationStatus _status = ApplicationStatus.New;
 
-        private DirectoryInfo _documentsDir;
+        private readonly DirectoryInfo _documentsDir;
 
         /// <summary>
         /// Creates a new JobApplication and initializes its Title
@@ -181,11 +181,9 @@ namespace ApplicationOrganizer
 
             try
             {
-                using (var stream = File.Open(System.IO.Path.Combine(Path, APPLICATION_MANIFEST_FILENAME), FileMode.Truncate))
-                {
-                    await JsonSerializer.SerializeAsync<JobApplicationDAL>(stream, dal);
-                    return true;
-                }
+                using var stream = File.Open(System.IO.Path.Combine(Path, APPLICATION_MANIFEST_FILENAME), FileMode.Truncate);
+                await JsonSerializer.SerializeAsync<JobApplicationDAL>(stream, dal);
+                return true;
             }
             catch (Exception ex)
             {
