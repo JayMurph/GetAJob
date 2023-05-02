@@ -46,6 +46,13 @@ namespace ApplicationOrganizer
                     await jobApp.Load();
                     JobApplications.Add(jobApp);
                 }
+
+                // sort collection by date of application
+                var sorted = JobApplications.OrderByDescending(app=>app.DateApplied).ToList();
+                for (int i = 0; i < sorted.Count; i++)
+                {
+                    JobApplications.Move(JobApplications.IndexOf(sorted[i]), i);
+                }
             }
             catch (Exception ex)
             {
