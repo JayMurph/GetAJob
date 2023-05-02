@@ -15,6 +15,7 @@ public partial class ApplicationPage : ContentPage
     /// Model for the page
     /// </summary>
     private JobApplication _jobApplication;
+
     public JobApplication JobApplication
     {
         get => _jobApplication;
@@ -37,11 +38,13 @@ public partial class ApplicationPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await _jobApplication.Load();
-        Dispatcher.Dispatch(new Action(() =>
+        if (await _jobApplication.Load() == false)
         {
-            BindingContext = _jobApplication;
-        }));
+            await DisplayAlert("Error", "Unable to load Application data", "OK");
+            await Shell.Current.GoToAsync(nameof(MainPage));
+        }
+
+        BindingContext = _jobApplication;
     }
 
     /// <summary>
@@ -82,7 +85,7 @@ public partial class ApplicationPage : ContentPage
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex);
                 await DisplayAlert("Error", "An error occurred", "OK");
             }
         }
@@ -118,19 +121,17 @@ public partial class ApplicationPage : ContentPage
     /// <returns>Task</returns>
     private async Task CopyFileToJobApplication(FileResult item)
     {
-        await Task.Run(() =>
+        await Task.Run(async () =>
         {
             try
             {
-                File.Copy(
-                    item.FullPath,
-                    Path.Combine(_jobApplication.Path, item.FileName)
-                );
+                File.Copy(item.FullPath, Path.Combine(_jobApplication.Path, item.FileName));
                 _jobApplication.Documents.Add(item.FileName);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                await DisplayAlert("Error", $"Unable to copy {item.FileName}", "OK");
+                Debug.WriteLine(ex);
             }
         });
     }

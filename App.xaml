@@ -10,25 +10,25 @@
             <Color x:Key="RejectedStatusColor">Red</Color>
             <Color x:Key="AcceptedStatusColor">Green</Color>
             <Color x:Key="InterviewingStatusColor">Orange</Color>
-        <local:ApplicationStatusToStringConverter x:Key="StatusToSTring" />
+            <local:ApplicationStatusToStringConverter x:Key="StatusToSTring" />
             <Style TargetType="Label" Class="ApplicationStatusLabel">
                 <Style.Triggers>
-                    <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={DynamicResource StatusToSTring}}" Value="New">
-                        <Setter Property="TextColor" Value="{DynamicResource NewStatusColor}" />
+                    <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="New">
+                        <Setter Property="TextColor" Value="{StaticResource NewStatusColor}" />
                     </DataTrigger>
-                    <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={DynamicResource StatusToSTring}}" Value="Submitted">
-                        <Setter Property="TextColor" Value="{DynamicResource SubmittedStatusColor}" />
+                    <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="Submitted">
+                        <Setter Property="TextColor" Value="{StaticResource SubmittedStatusColor}" />
                     </DataTrigger>
-                    <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={DynamicResource  StatusToSTring}}" Value="Rejected">
-                        <Setter Property="TextColor" Value="{DynamicResource RejectedStatusColor}" />
+                    <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource  StatusToSTring}}" Value="Rejected">
+                        <Setter Property="TextColor" Value="{StaticResource RejectedStatusColor}" />
                         <Setter Property="FontAttributes" Value="Bold" />
                     </DataTrigger>
-                    <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={DynamicResource StatusToSTring}}" Value="Accepted">
-                        <Setter Property="TextColor" Value="{DynamicResource AcceptedStatusColor}" />
+                    <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="Accepted">
+                        <Setter Property="TextColor" Value="{StaticResource AcceptedStatusColor}" />
                         <Setter Property="FontAttributes" Value="Bold" />
                     </DataTrigger>
-                    <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={DynamicResource StatusToSTring}}" Value="Interviewing">
-                        <Setter Property="TextColor" Value="{DynamicResource InterviewingStatusColor}" />
+                    <DataTrigger TargetType="Label" Binding="{Binding Status, ConverterParameter={StaticResource StatusToSTring}}" Value="Interviewing">
+                        <Setter Property="TextColor" Value="{StaticResource InterviewingStatusColor}" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>

@@ -72,24 +72,37 @@ namespace ApplicationOrganizer
         /// </summary>
         /// <param name="dispatcher">For invoking property changes</param>
         /// <returns>Task</returns>
-        public async Task Load()
+        public async Task<bool> Load()
         {
-            var files = _documentsDir.GetFiles();
-            var manifestFile = files.Where(info => info.Name == APPLICATION_MANIFEST_FILENAME).FirstOrDefault();
-            if (manifestFile == null)
+            try
             {
-                await CreateNewManifestFile();
-            }
-            else
-            {
-                await InitializeFromManifest();
-            }
+                var files = _documentsDir.GetFiles();
+                var manifestFile = files.Where(info => info.Name == APPLICATION_MANIFEST_FILENAME).FirstOrDefault();
 
-            Documents.Clear();
-            var otherFiles = files.Where(file => file.Name != APPLICATION_MANIFEST_FILENAME);
-            foreach (var file in otherFiles)
+                bool initializedFromManifest = manifestFile is null ? 
+                    await CreateNewManifestFile() : 
+                    await InitializeFromManifest();
+
+                Documents.Clear();
+
+                if (initializedFromManifest)
+                {
+                    var otherFiles = files.Where(file => file.Name != APPLICATION_MANIFEST_FILENAME);
+                    foreach (var file in otherFiles)
+                    {
+                        Documents.Add(file.Name);
+                    }
+
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception ex)
             {
-                Documents.Add(file.Name);
+                Debug.WriteLine(ex);
+                Documents.Clear();
+                return false;
             }
         }
 
@@ -98,25 +111,25 @@ namespace ApplicationOrganizer
         /// </summary>
         /// <param name="dispatcher">For invoking property changes</param>
         /// <returns>Task</returns>
-        private async Task InitializeFromManifest()
+        private async Task<bool> InitializeFromManifest()
         {
             try
             {
-                using (var stream = File.OpenRead(System.IO.Path.Combine(Path, APPLICATION_MANIFEST_FILENAME)))
-                {
-                    JobApplicationDAL dal = (JobApplicationDAL)await JsonSerializer.DeserializeAsync(stream, typeof(JobApplicationDAL));
-                    CompanyName = dal.CompanyName;
-                    ContactInfo = dal.ContactInfo;
-                    OtherInfo = dal.OtherInfo;
-                    DateApplied = dal.DateApplied;
-                    Interview = dal.Interview;
-                    Status = dal.Status;
-                    DueDate = dal.DueDate;
-                }
+                using var stream = File.OpenRead(System.IO.Path.Combine(Path, APPLICATION_MANIFEST_FILENAME));
+                JobApplicationDAL dal = (JobApplicationDAL)await JsonSerializer.DeserializeAsync(stream, typeof(JobApplicationDAL));
+                CompanyName = dal.CompanyName;
+                ContactInfo = dal.ContactInfo;
+                OtherInfo = dal.OtherInfo;
+                DateApplied = dal.DateApplied;
+                Interview = dal.Interview;
+                Status = dal.Status;
+                DueDate = dal.DueDate;
+                return true;
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex);
+                return false;
             }
         }
 
@@ -124,26 +137,27 @@ namespace ApplicationOrganizer
         /// Creates a new manifest file for the Job Application
         /// </summary>
         /// <returns>Task</returns>
-        private async Task CreateNewManifestFile()
+        private async Task<bool> CreateNewManifestFile()
         {
             try
             {
                 File.CreateText(System.IO.Path.Combine(Path, APPLICATION_MANIFEST_FILENAME)).Close();
                 try
                 {
-                    using (var stream = File.OpenWrite(System.IO.Path.Combine(Path, APPLICATION_MANIFEST_FILENAME)))
-                    {
-                        await JsonSerializer.SerializeAsync<JobApplicationDAL>(stream, new JobApplicationDAL());
-                    }
+                    using var stream = File.OpenWrite(System.IO.Path.Combine(Path, APPLICATION_MANIFEST_FILENAME));
+                    await JsonSerializer.SerializeAsync<JobApplicationDAL>(stream, new JobApplicationDAL());
+                    return true;
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine(ex);
+                    return false;
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex);
+                return false;
             }
         }
 
@@ -175,7 +189,7 @@ namespace ApplicationOrganizer
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex);
                 return false;
             }
         }

@@ -7,8 +7,8 @@ namespace ApplicationOrganizer;
 /// </summary>
 public partial class MainPage : ContentPage
 {
-    private string _dataPath = FileSystem.AppDataDirectory;
-    private AllApplications _allApplications;
+    private readonly string _dataPath = FileSystem.AppDataDirectory;
+    private readonly AllApplications _allApplications;
 
     public MainPage(AllApplications allApplications)
     {
@@ -23,7 +23,10 @@ public partial class MainPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await ((AllApplications)BindingContext).LoadApplications();
+        if (await _allApplications.LoadApplications() == false)
+        {
+            await DisplayAlert("Error", "Unable to load Application data", "OK");
+        }
     }
 
     /// <summary>
@@ -34,7 +37,7 @@ public partial class MainPage : ContentPage
     /// <param name="e">UNUSED</param>
     private async void NewApplicationButtonClicked(object sender, EventArgs e)
     {
-        // get name of new job applcation
+        // get name of new job application
         string result = await DisplayPromptAsync("New Job Application", "Title", maxLength: 32, accept: "Create");
         if (result != null)
         {

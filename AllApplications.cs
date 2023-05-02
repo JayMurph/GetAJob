@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace ApplicationOrganizer
 {
@@ -15,34 +16,48 @@ namespace ApplicationOrganizer
 
         [ObservableProperty]
         private int _applicationsCreated;
+
         [ObservableProperty]
         private int _applicationsSubmitted;
+
         [ObservableProperty]
         private int _applicationsRejected;
+
         [ObservableProperty]
         private int _applicationsInterviewed;
-
 
         /// <summary>
         /// Loads and initializes the JobApplications parameter
         /// </summary>
         /// <param name="dispatcher">For dispatching notification changes</param>
         /// <returns>Task</returns>
-        public async Task LoadApplications()
+        public async Task<bool> LoadApplications()
         {
             JobApplications.Clear();
 
-            var jobApps = Directory
-                .EnumerateDirectories(FileSystem.Current.AppDataDirectory)
-                .Select((path) => new JobApplication(path));
-
-            foreach(var jobApp in jobApps)
+            try
             {
-                await jobApp.Load();
-                JobApplications.Add(jobApp);
+                var jobApps = Directory
+                    .EnumerateDirectories(FileSystem.Current.AppDataDirectory)
+                    .Select((path) => new JobApplication(path));
+
+                foreach (var jobApp in jobApps)
+                {
+                    await jobApp.Load();
+                    JobApplications.Add(jobApp);
+                }
             }
+            catch (Exception ex)
+            {
+                JobApplications.Clear();
+                Debug.WriteLine(ex);
+                return false;
+            }
+
             UpdateStats();
             JobApplications.CollectionChanged += (a, b) => UpdateStats();
+
+            return true;
         }
 
         private void UpdateStats()

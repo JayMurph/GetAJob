@@ -25,13 +25,13 @@
                 <Label Text="Application Stats" FontSize="Title"/>
                 <Grid ColumnDefinitions="3*,*" RowDefinitions="*,*,*,*" ColumnSpacing="16" HorizontalOptions="Center">
                     <Label Text="Created" FontSize="Subtitle" Grid.Row="0" Grid.Column="0" HorizontalTextAlignment="End" />
-                    <Label Text="{Binding ApplicationsCreated}" FontSize="Subtitle" Grid.Row="0" Grid.Column="1" TextColor="{DynamicResource NewStatusColor}" />
+                    <Label Text="{Binding ApplicationsCreated}" FontSize="Subtitle" Grid.Row="0" Grid.Column="1" TextColor="{StaticResource NewStatusColor}" />
                     <Label Text="Submitted" FontSize="Subtitle" Grid.Row="1" Grid.Column="0" HorizontalTextAlignment="End"/>
-                    <Label Text="{Binding ApplicationsSubmitted}" FontSize="Subtitle" Grid.Row="1" Grid.Column="1" TextColor="{DynamicResource SubmittedStatusColor}" />
+                    <Label Text="{Binding ApplicationsSubmitted}" FontSize="Subtitle" Grid.Row="1" Grid.Column="1" TextColor="{StaticResource SubmittedStatusColor}" />
                     <Label Text="Interviewed" FontSize="Subtitle" Grid.Row="2" Grid.Column="0" HorizontalTextAlignment="End"/>
-                    <Label Text="{Binding ApplicationsInterviewed}" FontSize="Subtitle" Grid.Row="2" Grid.Column="1" TextColor="{DynamicResource InterviewingStatusColor}" />
+                    <Label Text="{Binding ApplicationsInterviewed}" FontSize="Subtitle" Grid.Row="2" Grid.Column="1" TextColor="{StaticResource InterviewingStatusColor}" />
                     <Label Text="Rejected" FontSize="Subtitle" Grid.Row="3" Grid.Column="0" HorizontalTextAlignment="End"/>
-                    <Label Text="{Binding ApplicationsRejected}" FontSize="Subtitle" Grid.Row="3" Grid.Column="1" TextColor="{DynamicResource RejectedStatusColor}" />
+                    <Label Text="{Binding ApplicationsRejected}" FontSize="Subtitle" Grid.Row="3" Grid.Column="1" TextColor="{StaticResource RejectedStatusColor}" />
                 </Grid>
             </VerticalStackLayout>
         </Grid>
