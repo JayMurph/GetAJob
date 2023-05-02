@@ -146,17 +146,9 @@ namespace ApplicationOrganizer
             try
             {
                 File.CreateText(System.IO.Path.Combine(Path, APPLICATION_MANIFEST_FILENAME)).Close();
-                try
-                {
-                    using var stream = File.OpenWrite(System.IO.Path.Combine(Path, APPLICATION_MANIFEST_FILENAME));
-                    await JsonSerializer.SerializeAsync<JobApplicationDAL>(stream, new JobApplicationDAL());
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex);
-                    return false;
-                }
+                using var stream = File.OpenWrite(System.IO.Path.Combine(Path, APPLICATION_MANIFEST_FILENAME));
+                await JsonSerializer.SerializeAsync<JobApplicationDAL>(stream, new JobApplicationDAL());
+                return true;
             }
             catch (Exception ex)
             {
