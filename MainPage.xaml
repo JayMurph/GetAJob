@@ -4,6 +4,7 @@
              x:Class="ApplicationOrganizer.MainPage"
             xmlns:local="clr-namespace:ApplicationOrganizer"
             x:DataType="local:AllApplications">
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="NewApplicationButtonClicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
     </ContentPage.ToolbarItems>
@@ -12,8 +13,7 @@
             Source="get_a_job_logo.png"
             HeightRequest="130"
             HorizontalOptions="Center"
-            ScaleX="1.5"
-            />
+            ScaleX="1.5" />
         <Grid ColumnDefinitions="*,*">
             <Image
                 Source="get_a_job_guy.png"
