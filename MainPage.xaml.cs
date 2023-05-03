@@ -46,7 +46,7 @@ public partial class MainPage : ContentPage
             {
                 JobApplication newJobApp = await CreateNewJobApplicationAsync(path);
 
-                if (newJobApp != null)
+                if (newJobApp != null && await newJobApp.Load())
                 {
                     _allApplications.JobApplications.Add(newJobApp);
                     await Shell.Current.GoToAsync(nameof(ApplicationPage), true, new Dictionary<string, object>()
