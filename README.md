@@ -5,7 +5,7 @@ Job application organizer
 - Track status of Job Applications
 - Store Job Application documents and other info
 
-Built with .NET MAUI
+Built for Windows with .NET MAUI
 
 ## Home Page
 ![GetAJobHomeBlur](https://user-images.githubusercontent.com/50997667/235811629-b7757371-5aa8-4786-b19a-02d3e78636e6.png)
