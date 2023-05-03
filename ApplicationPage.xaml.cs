@@ -29,7 +29,6 @@ public partial class ApplicationPage : ContentPage
     public ApplicationPage()
     {
         InitializeComponent();
-        BindingContext = _jobApplication;
     }
 
     protected override void OnAppearing()
@@ -43,7 +42,7 @@ public partial class ApplicationPage : ContentPage
         base.OnDisappearing();
         if (!await _jobApplication.Write())
         {
-            Task.Run(async () => await DisplayAlert("Error", "Unable to save Application changes", "OK"));
+            await DisplayAlert("Error", "Unable to save Application changes", "OK");
         }
     }
 
