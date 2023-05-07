@@ -53,7 +53,7 @@ public partial class ApplicationPage : ContentPage
     /// <param name="e">UNUSED</param>
     private void OpenDocumentsButtonClicked(object sender, EventArgs e)
     {
-        Process.Start("explorer.exe", new[] { _jobApplication.Path });
+        Process.Start("explorer.exe", new[] { _jobApplication.Path }).Dispose();
     }
 
     /// <summary>
@@ -132,11 +132,11 @@ public partial class ApplicationPage : ContentPage
     /// <param name="e">Contains name of document to view as Parameter property</param>
     private void DocumentDoubleTapped(object sender, TappedEventArgs e)
     {
-        Process.Start("explorer.exe", new[] { Path.Combine(_jobApplication.Path, e.Parameter as string) });
+        Process.Start("explorer.exe", new[] { Path.Combine(_jobApplication.Path, e.Parameter as string) }).Dispose();
     }
 
     private void ViewContextMenuItem_Clicked(object sender, EventArgs e)
     {
-        Process.Start("explorer.exe", new[] { Path.Combine(_jobApplication.Path, (sender as MenuFlyoutItem).CommandParameter as string) });
+        Process.Start("explorer.exe", new[] { Path.Combine(_jobApplication.Path, (sender as MenuFlyoutItem).CommandParameter as string) }).Dispose();
     }
 }
