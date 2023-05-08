@@ -41,6 +41,20 @@ public partial class MainPage : ContentPage
         string result = await DisplayPromptAsync("New Job Application", "Title", maxLength: 32, accept: "Create");
         if (result != null)
         {
+            result = result.Trim();
+            if (string.IsNullOrWhiteSpace(result))
+            {
+                await DisplayAlert("Error", "Application title cannot be empty", "OK");
+                return;
+            }
+
+            // Check that application title does not contain invalid Path characters
+            if (!Path.GetInvalidPathChars().All((ch)=>!result.Contains(ch))) 
+            {
+                await DisplayAlert("Error", $"Application title contains invalid characters", "OK");
+                return;
+            }
+
             string path = Path.Combine(_dataPath, result);
             if (!Directory.Exists(path))
             {
