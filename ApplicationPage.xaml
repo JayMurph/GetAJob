@@ -84,11 +84,9 @@ x:Name="applicationPage"
                     <Button x:Name="DocumentsAddButton" Clicked="AddDocumentButtonClicked" Text="Add" FontSize="Body" />
                 </HorizontalStackLayout>
                 <Border Margin="0,16,0,0" FlexLayout.Grow="1">
-                    <CollectionView
-                            x:Name="documentsCollection"
+                    <CollectionView x:Name="documentsCollection"
                             ItemsSource="{Binding Documents}"
                             SelectionMode="Single"
-                            HeightRequest="250"
                             FlexLayout.Grow="1">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="6" />
