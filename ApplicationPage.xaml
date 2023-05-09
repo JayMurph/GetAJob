@@ -11,43 +11,43 @@ x:Name="applicationPage"
         <Picker x:Name="StatusPicker" WidthRequest="200" SelectedItem="{Binding Status}" ItemsSource="{Binding Source={x:Reference applicationPage}, Path=Statuses, ConverterParameter={StaticResource StatusToSTring}}" />
         <Grid HorizontalOptions="Center" ColumnDefinitions="150,150,150" RowDefinitions="*,*">
             <Label Text="Due" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center" />
-            <DatePicker x:Name="DueDatePicker" Date="{Binding DueDate}" Grid.Column="0" Grid.Row="1" HorizontalOptions="Center" >
-                <DatePicker.Style >
-                    <Style TargetType="DatePicker" >
+            <DatePicker x:Name="DueDatePicker" Date="{Binding DueDate}" Grid.Column="0" Grid.Row="1" HorizontalOptions="Center">
+                <DatePicker.Style>
+                    <Style TargetType="DatePicker">
                         <Setter Property="IsEnabled" Value="False" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Status}" Value="{x:Static local:ApplicationStatus.New}" TargetType="DatePicker">
-                                <Setter Property="IsEnabled" Value="True"/>
+                                <Setter Property="IsEnabled" Value="True" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </DatePicker.Style> 
+                </DatePicker.Style>
             </DatePicker>
             <Label Text="Applied" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0" HorizontalOptions="Center" />
-            <DatePicker x:Name="DateAppliedPicker" Date="{Binding DateApplied}" Grid.Column="1" Grid.Row="1" HorizontalOptions="Center" >
-                <DatePicker.Style >
-                    <Style TargetType="DatePicker" >
+            <DatePicker x:Name="DateAppliedPicker" Date="{Binding DateApplied}" Grid.Column="1" Grid.Row="1" HorizontalOptions="Center">
+                <DatePicker.Style>
+                    <Style TargetType="DatePicker">
                         <Setter Property="IsEnabled" Value="False" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Status}" Value="{x:Static local:ApplicationStatus.New}" TargetType="DatePicker">
-                                <Setter Property="IsEnabled" Value="True"/>
+                                <Setter Property="IsEnabled" Value="True" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </DatePicker.Style> 
+                </DatePicker.Style>
             </DatePicker>
             <Label Text="Interview" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="0" HorizontalOptions="Center" />
-            <DatePicker x:Name="InterviewPicker" Date="{Binding Interview}" Grid.Column="2" Grid.Row="1" HorizontalOptions="Center" >
-                <DatePicker.Style >
-                    <Style TargetType="DatePicker" >
+            <DatePicker x:Name="InterviewPicker" Date="{Binding Interview}" Grid.Column="2" Grid.Row="1" HorizontalOptions="Center">
+                <DatePicker.Style>
+                    <Style TargetType="DatePicker">
                         <Setter Property="IsEnabled" Value="False" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Status}" Value="{x:Static local:ApplicationStatus.Interviewing}" TargetType="DatePicker">
-                                <Setter Property="IsEnabled" Value="True"/>
+                                <Setter Property="IsEnabled" Value="True" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </DatePicker.Style> 
+                </DatePicker.Style>
             </DatePicker>
         </Grid>
         <Grid ColumnDefinitions="*,*" Margin="0,16,0,0" ColumnSpacing="24" HeightRequest="500">
@@ -79,15 +79,14 @@ x:Name="applicationPage"
             </FlexLayout>
             <FlexLayout Grid.Column="1" Direction="Column" AlignContent="Start">
                 <Label FontSize="Subtitle" HorizontalOptions="Center">Documents</Label>
-                <HorizontalStackLayout HorizontalOptions="Center" Spacing="32" Margin="0,16,0,0">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="32" Margin="0,8,0,0">
                     <Button x:Name="DocumentsOpenButton" Clicked="OpenDocumentsButtonClicked" Text="Open Folder" FontSize="Body" />
                     <Button x:Name="DocumentsAddButton" Clicked="AddDocumentButtonClicked" Text="Add" FontSize="Body" />
                 </HorizontalStackLayout>
-                <Border Margin="0,16,0,0" FlexLayout.Grow="1">
+                <Border Margin="0,8,0,0" HeightRequest="400">
                     <CollectionView x:Name="documentsCollection"
-                            ItemsSource="{Binding Documents}"
-                            SelectionMode="Single"
-                            FlexLayout.Grow="1">
+                        ItemsSource="{Binding Documents}"
+                        SelectionMode="Single">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" ItemSpacing="6" />
                         </CollectionView.ItemsLayout>
