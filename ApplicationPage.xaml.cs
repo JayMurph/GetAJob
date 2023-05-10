@@ -112,8 +112,15 @@ public partial class ApplicationPage : ContentPage
     {
         try
         {
-            await Task.Run(() => File.Copy(item.FullPath, Path.Combine(_jobApplication.Path, item.FileName)));
-            _jobApplication.Documents.Add(item.FileName);
+            if (!_jobApplication.Documents.Contains(item.FileName))
+            {
+                await Task.Run(() => File.Copy(item.FullPath, Path.Combine(_jobApplication.Path, item.FileName)));
+                _jobApplication.Documents.Add(item.FileName);
+            }
+            else
+            {
+                await DisplayAlert("Error", $"A document by the name of {item.FileName} is already present", "OK");
+            }
         }
         catch (Exception ex)
         {
