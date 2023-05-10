@@ -97,7 +97,7 @@ public partial class ApplicationPage : ContentPage
         {
             foreach (var item in result)
             {
-                await CopyFileToJobApplication(item);
+                await CopyFileToJobApplicationAsync(item);
             }
         }
         DocumentsAddButton.IsEnabled = true;
@@ -108,21 +108,18 @@ public partial class ApplicationPage : ContentPage
     /// </summary>
     /// <param name="item">File to copy</param>
     /// <returns>Task</returns>
-    private async Task CopyFileToJobApplication(FileResult item)
+    private async Task CopyFileToJobApplicationAsync(FileResult item)
     {
-        await Task.Run(async () =>
+        try
         {
-            try
-            {
-                File.Copy(item.FullPath, Path.Combine(_jobApplication.Path, item.FileName));
-                _jobApplication.Documents.Add(item.FileName);
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", $"Unable to copy {item.FileName}", "OK");
-                Debug.WriteLine(ex);
-            }
-        });
+            await Task.Run(() => File.Copy(item.FullPath, Path.Combine(_jobApplication.Path, item.FileName)));
+            _jobApplication.Documents.Add(item.FileName);
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"Unable to copy {item.FileName}", "OK");
+            Debug.WriteLine(ex);
+        }
     }
 
     /// <summary>
