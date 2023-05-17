@@ -51,7 +51,7 @@ x:Name="applicationPage"
             </DatePicker>
         </Grid>
         <Grid ColumnDefinitions="*,*" Margin="0,16,0,0" ColumnSpacing="24" HeightRequest="500">
-            <FlexLayout Grid.Column="0" Direction="Column" FlexLayout.Grow="1" AlignContent="Start">
+            <FlexLayout Grid.Column="0" Direction="Column" AlignContent="Start" >
                 <Label Text="Company" FontSize="Subtitle" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Margin="0,8,0,0" />
                 <Entry x:Name="CompanyNameEditor"
                 FontSize="Medium"
@@ -72,10 +72,11 @@ x:Name="applicationPage"
                 MaxLength="128" />
                 <Label Text="Info" FontSize="Subtitle" VerticalTextAlignment="Center" HorizontalOptions="Start" Margin="0,8,0,0" />
                 <Editor x:Name="OtherInfoEditor"
+                HeightRequest="180"
                 FontSize="Medium"
                 Text="{Binding OtherInfo}"
                 Placeholder="Info"
-                FlexLayout.Grow="1" />
+                />
             </FlexLayout>
             <FlexLayout Grid.Column="1" Direction="Column" AlignContent="Start">
                 <Label FontSize="Subtitle" HorizontalOptions="Center">Documents</Label>
