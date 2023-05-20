@@ -10,7 +10,7 @@ x:Name="applicationPage"
     <VerticalStackLayout Spacing="10" Margin="32" WidthRequest="800">
         <Picker x:Name="StatusPicker" WidthRequest="200" SelectedItem="{Binding Status}" ItemsSource="{Binding Source={x:Reference applicationPage}, Path=Statuses, ConverterParameter={StaticResource StatusToSTring}}" />
         <Grid HorizontalOptions="Center" ColumnDefinitions="150,150,150" RowDefinitions="*,*">
-            <Label Text="Due" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center" />
+            <Label Text="Due" Grid.Column="0" Grid.Row="0" Style="{StaticResource Key=PickerLabelStyle}"/>
             <DatePicker x:Name="DueDatePicker" Date="{Binding DueDate}" Grid.Column="0" Grid.Row="1" HorizontalOptions="Center">
                 <DatePicker.Style>
                     <Style TargetType="DatePicker">
@@ -23,7 +23,7 @@ x:Name="applicationPage"
                     </Style>
                 </DatePicker.Style>
             </DatePicker>
-            <Label Text="Applied" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="1" Grid.Row="0" HorizontalOptions="Center" />
+            <Label Text="Applied" Grid.Column="1" Grid.Row="0" Style="{StaticResource Key=PickerLabelStyle}"/>
             <DatePicker x:Name="DateAppliedPicker" Date="{Binding DateApplied}" Grid.Column="1" Grid.Row="1" HorizontalOptions="Center">
                 <DatePicker.Style>
                     <Style TargetType="DatePicker">
@@ -36,7 +36,7 @@ x:Name="applicationPage"
                     </Style>
                 </DatePicker.Style>
             </DatePicker>
-            <Label Text="Interview" FontSize="Subtitle" VerticalTextAlignment="Center" Grid.Column="2" Grid.Row="0" HorizontalOptions="Center" />
+            <Label Text="Interview" Grid.Column="2" Grid.Row="0" Style="{StaticResource Key=PickerLabelStyle}"/>
             <DatePicker x:Name="InterviewPicker" Date="{Binding Interview}" Grid.Column="2" Grid.Row="1" HorizontalOptions="Center">
                 <DatePicker.Style>
                     <Style TargetType="DatePicker">
@@ -52,25 +52,25 @@ x:Name="applicationPage"
         </Grid>
         <Grid ColumnDefinitions="*,*" Margin="0,16,0,0" ColumnSpacing="24" HeightRequest="500">
             <FlexLayout Grid.Column="0" Direction="Column" AlignContent="Start" >
-                <Label Text="Company" FontSize="Subtitle" VerticalTextAlignment="Center" HorizontalTextAlignment="Start" Margin="0,8,0,0" />
+                <Label Text="Company" Style="{StaticResource Key=EntryLabelStyle}"/>
                 <Entry x:Name="CompanyNameEditor"
                 FontSize="Medium"
                 Text="{Binding CompanyName}"
                 Placeholder="Company Name"
                 MaxLength="128" />
-                <Label Text="Contact" FontSize="Subtitle" VerticalTextAlignment="Center" HorizontalOptions="Start" Margin="0,8,0,0" />
+                <Label Text="Contact" Style="{StaticResource Key=EntryLabelStyle}"/>
                 <Entry x:Name="ContactInfoEditor"
                 FontSize="Medium"
                 Text="{Binding ContactInfo}"
                 Placeholder="Contact Info"
                 MaxLength="128" />
-                <Label Text="Position" FontSize="Subtitle" VerticalTextAlignment="Center" HorizontalOptions="Start" Margin="0,8,0,0" />
+                <Label Text="Position" Style="{StaticResource Key=EntryLabelStyle}" />
                 <Entry x:Name="PositionEditor"
                 FontSize="Medium"
                 Text="{Binding Position}"
                 Placeholder="Position"
                 MaxLength="128" />
-                <Label Text="Info" FontSize="Subtitle" VerticalTextAlignment="Center" HorizontalOptions="Start" Margin="0,8,0,0" />
+                <Label Text="Info" Style="{StaticResource Key=EntryLabelStyle}"/>
                 <Editor x:Name="OtherInfoEditor"
                 HeightRequest="180"
                 FontSize="Medium"

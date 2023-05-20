@@ -32,7 +32,21 @@
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
-
+            <Style x:Key="StatsLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Subtitle" />
+                <Setter Property="HorizontalTextAlignment" Value="End" />
+            </Style>
+            <Style x:Key="PickerLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Subtitle" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+            <Style TargetType="Label" x:Key="EntryLabelStyle">
+                <Setter Property="FontSize" Value="Subtitle" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,8,0,0" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
